@@ -23,8 +23,26 @@
         opacity: 0.8;
     }
 
-    .card-block {
+    .title {
+        color: #4273FA;
+        font-size: 18px;
+    }
 
+    .card-block {
+        border-bottom: 1px solid rgba(207, 216, 220, 0.35);
+    }
+
+    #input_photo {
+        display: none;
+    }
+
+    #label_photo {
+        color: white;
+        margin-right: 15px;
+    }
+
+    #label_photo > i {
+        margin-right: 4px;
     }
 </style>
 
@@ -37,45 +55,48 @@
                 </div>
 
                 <div class="card-body">
+
                     <div class="card-gallery">
                         @foreach($camp->photos as $photo)
                             <img src="{{$photo->url}}" alt="photo_gallery">
                         @endforeach
                     </div>
 
+                    <div class="card-block">
+                        <div class="row title">
+                            <strong>Agregar una nueva foto:</strong>
+                        </div>
+                        <br>
 
-                    <div class="form-horizontal">
+                        <div class="row">
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <label for="input_photo" id="label_photo" class="btn btn-success">
+                                        <i class="fa fa-camera"></i> Elige una foto
+                                    </label>
 
-                              <div class="form-group">
-                                <label class="control-label col-md-3">Upload Image</label>
-                                <div class="col-md-8">
-                                  <div class="row">
-                                    <div id="demo"></div>
-                                  </div>
+                                    <input type="file" name="photo" id="input_photo" onchange="readImage(this)">
+
+                                    <button type="submit" class="btn btn-danger" title="Subir una foto">
+                                        <i class="fa fa-upload"></i> Guardar foto
+                                    </button>
                                 </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="control-label col-md-3"></label>
-                                <div class="col-md-8">
-                                  <input type="submit" class="btn btn-primary" value="Send">
-                                </div>
-                              </div>
-                            </div>
+                            </form>
+                        </div>
 
-                    <br><br>
+                        <div class="row d-flex justify-content-center">
+                            <img id="img_preview" src="/images/no_image.png" alt="Tu imagen" />
+                        </div>
+
+                    </div>
+                    <br>
+
                     <div class="row">
                         <div class="col-auto">
                             <a style="color:white;" class="btn btn-success" href="{{route('admin/camps/index')}}">
                                 <i class="fa fa-chevron-left"></i> Regresar
                             </a>
                         </div>
-
-                        <form class="col-auto">
-                            <input type="file" name="myFile">
-                            <button type="submit" class="btn btn-danger" title="Subir una foto">
-                                <i class="fa fa-upload"></i> Subir una foto
-                            </button>
-                        </form>
                     </div>
                 </div>
                 <!-- End of card body -->
@@ -83,19 +104,23 @@
         </div>
     </div>
 @endsection
+
 <script
     src="https://code.jquery.com/jquery-3.4.1.js"
     integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous">
 </script>
 
-<script src="/js/spartan-multi-image-picker.js"></script>
-
 <script type="text/javascript">
-    $("#demo").spartanMultiImagePicker({
+    function readImage (input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-        fieldName:  'fileUpload[]',
-        rowHeight : '200px',
-	    groupClassName : 'col-md-4 col-sm-4 col-xs-6',
-    });
+            reader.onload = function (e) {
+                $('#img_preview').attr('src', e.target.result); // Renderizamos la imagen
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 </script>
