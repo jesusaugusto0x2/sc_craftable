@@ -47,6 +47,15 @@
 </style>
 
 @section('body')
+    <div class="col-lg-12">
+        @if($notificacion = Session::get('notification_success'))
+            <div class="notification notification-success">{{ $notificacion }}</div>
+        @endif
+        @if($notificacion_error = Session::get('notification_error'))
+            <div class="notification notification-error">{{ $notificacion_error }}</div>
+        @endif
+    </div>
+
     <div class="row">
         <div class="col">
             <div class="card">
@@ -69,13 +78,21 @@
                         <br>
 
                         <div class="row">
-                            <form class="form-inline">
+                            <form class="form-inline"
+                                action="{{route('admin/camps/gallery/save-photo', $camp->id)}}"
+                                method="POST"
+                                enctype="multipart/form-data"
+                            >
+                                {{ csrf_field() }}
+
                                 <div class="form-group">
                                     <label for="input_photo" id="label_photo" class="btn btn-success">
                                         <i class="fa fa-camera"></i> Elige una foto
                                     </label>
 
-                                    <input type="file" name="photo" id="input_photo" onchange="readImage(this)">
+                                    <input type="file" name="photo" id="input_photo" onchange="readImage(this)"
+                                        accept="image/png, image/jpeg"
+                                    >
 
                                     <button type="submit" class="btn btn-danger" title="Subir una foto">
                                         <i class="fa fa-upload"></i> Guardar foto

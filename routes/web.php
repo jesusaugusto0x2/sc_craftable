@@ -67,6 +67,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
             //Gallery view
             Route::get('/{id}/gallery', 'CampsController@viewGallery')->name('gallery');
+            Route::post('{id}/savePhoto', 'CampsController@savePhoto')->name('gallery/save-photo');
 
             // Custom
             Route::get('/{id}/payments', 'CampPaymentController@getPayments')->name('payments');

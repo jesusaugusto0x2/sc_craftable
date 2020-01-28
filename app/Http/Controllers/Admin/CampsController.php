@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Camp\DestroyCamp;
 use App\Http\Requests\Admin\Camp\IndexCamp;
 use App\Http\Requests\Admin\Camp\StoreCamp;
 use App\Http\Requests\Admin\Camp\UpdateCamp;
+use Illuminate\Http\Request;
 use App\Models\Camp;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
@@ -19,6 +20,11 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+
+use Image;
+use App\Models\CampPhoto;
+use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class CampsController extends Controller
 {
@@ -190,6 +196,33 @@ class CampsController extends Controller
         try {
             $camp = Camp::find($camp_id);
             return view('admin.camp.gallery')->with('camp', $camp);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function savePhoto (Request $request, $camp_id) {
+        try {
+            if (!isset($request->photo)) {
+                return redirect()->back()->with('notification_error', '¡Debes seleccionar una imagen!');
+            }
+
+            $imgrpath = $request->file('photo')->getRealPath();
+
+            $image = Image::make($imgrpath)->stream('png', 90);
+
+            $current_time = Carbon::now()->format('Ymdhis');
+            $path = '/camp_' . $camp_id . '/' . $current_time . '.png';
+
+            Storage::disk('images')->put($path, $image);
+
+            CampPhoto::create([
+                'camp_id'   =>  $camp_id,
+                'url'       =>  config('app.url') . 'images' . $path,
+            ]);
+
+            return redirect()->back()->with('notification_success', 'La foto ha sido guardada exitosamente');
+
         } catch (\Exception $e) {
             return response()->json($e->getMessage());
         }
