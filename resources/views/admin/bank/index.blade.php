@@ -13,8 +13,8 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> {{ trans('admin.bank.actions.index') }}
-                        <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('admin/banks/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.bank.actions.create') }}</a>
+                        <i class="fa fa-align-justify"></i> Bancos
+                        <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('admin/banks/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; Nuevo Banco</a>
                     </div>
                     <div class="card-body" v-cloak>
                         <div class="card-block">
@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="col-sm-auto form-group ">
                                         <select class="form-control" v-model="pagination.state.per_page">
-                                            
+
                                             <option value="10">10</option>
                                             <option value="25">25</option>
                                             <option value="100">100</option>
@@ -49,8 +49,8 @@
                                             </label>
                                         </th>
 
-                                        <th is='sortable' :column="'id'">{{ trans('admin.bank.columns.id') }}</th>
-                                        <th is='sortable' :column="'name'">{{ trans('admin.bank.columns.name') }}</th>
+                                        <th is='sortable' :column="'id'">ID</th>
+                                        <th is='sortable' :column="'name'">Nombre</th>
 
                                         <th></th>
                                     </tr>
@@ -76,7 +76,7 @@
 
                                     <td>@{{ item.id }}</td>
                                         <td>@{{ item.name }}</td>
-                                        
+
                                         <td>
                                             <div class="row no-gutters">
                                                 <div class="col-auto">

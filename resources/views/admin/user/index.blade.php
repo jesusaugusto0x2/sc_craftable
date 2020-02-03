@@ -13,8 +13,8 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> {{ trans('admin.user.actions.index') }}
-                        <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('admin/users/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.user.actions.create') }}</a>
+                        <i class="fa fa-align-justify"></i> Usuarios
+                        <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('admin/users/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; Nuevo Usuario</a>
                     </div>
                     <div class="card-body" v-cloak>
                         <div class="card-block">
@@ -22,15 +22,15 @@
                                 <div class="row justify-content-md-between">
                                     <div class="col col-lg-7 col-xl-5 form-group">
                                         <div class="input-group">
-                                            <input class="form-control" placeholder="{{ trans('brackets/admin-ui::admin.placeholder.search') }}" v-model="search" @keyup.enter="filter('search', $event.target.value)" />
+                                            <input class="form-control" placeholder="Buscar" v-model="search" @keyup.enter="filter('search', $event.target.value)" />
                                             <span class="input-group-append">
-                                                <button type="button" class="btn btn-primary" @click="filter('search', search)"><i class="fa fa-search"></i>&nbsp; {{ trans('brackets/admin-ui::admin.btn.search') }}</button>
+                                                <button type="button" class="btn btn-primary" @click="filter('search', search)"><i class="fa fa-search"></i>&nbsp; Buscar</button>
                                             </span>
                                         </div>
                                     </div>
                                     <div class="col-sm-auto form-group ">
                                         <select class="form-control" v-model="pagination.state.per_page">
-                                            
+
                                             <option value="10">10</option>
                                             <option value="25">25</option>
                                             <option value="100">100</option>
@@ -49,11 +49,11 @@
                                             </label>
                                         </th>
 
-                                        <th is='sortable' :column="'id'">{{ trans('admin.user.columns.id') }}</th>
-                                        <th is='sortable' :column="'name'">{{ trans('admin.user.columns.name') }}</th>
-                                        <th is='sortable' :column="'email'">{{ trans('admin.user.columns.email') }}</th>
-                                        <th is='sortable' :column="'email_verified_at'">{{ trans('admin.user.columns.email_verified_at') }}</th>
-                                        <th is='sortable' :column="'is_blocked'">{{ trans('admin.user.columns.is_blocked') }}</th>
+                                        <th is='sortable' :column="'id'">ID</th>
+                                        <th is='sortable' :column="'name'">Nombre</th>
+                                        <th is='sortable' :column="'email'">Correo</th>
+                                        <th is='sortable' :column="'email_verified_at'">Verificado</th>
+                                        <th is='sortable' :column="'is_blocked'">Bloqueado</th>
 
                                         <th></th>
                                     </tr>
@@ -82,7 +82,7 @@
                                         <td>@{{ item.email }}</td>
                                         <td>@{{ item.email_verified_at | datetime }}</td>
                                         <td>@{{ item.is_blocked }}</td>
-                                        
+
                                         <td>
                                             <div class="row no-gutters">
                                                 <div class="col-auto">

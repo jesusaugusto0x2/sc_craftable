@@ -13,8 +13,8 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> {{ trans('admin.camp.actions.index') }}
-                        <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('admin/camps/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.camp.actions.create') }}</a>
+                        <i class="fa fa-align-justify"></i> Campamentos
+                        <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('admin/camps/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; Nuevo Campamento</a>
                     </div>
                     <div class="card-body" v-cloak>
                         <div class="card-block">
@@ -49,11 +49,11 @@
                                             </label>
                                         </th>
 
-                                        <th is='sortable' :column="'id'">{{ trans('admin.camp.columns.id') }}</th>
-                                        <th is='sortable' :column="'location'">{{ trans('admin.camp.columns.location') }}</th>
-                                        <th is='sortable' :column="'entries'">{{ trans('admin.camp.columns.entries') }}</th>
-                                        <th is='sortable' :column="'cost'">{{ trans('admin.camp.columns.cost') }}</th>
-                                        <th is='sortable' :column="'date'">{{ trans('admin.camp.columns.date') }}</th>
+                                        <th is='sortable' :column="'id'">ID</th>
+                                        <th is='sortable' :column="'location'">Ubicación</th>
+                                        <th is='sortable' :column="'entries'">Entradas</th>
+                                        <th is='sortable' :column="'cost'">Costo</th>
+                                        <th is='sortable' :column="'date'">Fecha</th>
 
                                         <th></th>
                                     </tr>
@@ -94,11 +94,11 @@
                                                 </div>
 
                                                 <div class="col-auto">
-                                                    <a class="btn btn-sm btn-spinner btn-info" :href="item.resource_url + '/edit'" title="{{ trans('brackets/admin-ui::admin.btn.edit') }}" role="button"><i class="fa fa-edit"></i></a>
+                                                    <a class="btn btn-sm btn-spinner btn-info" :href="item.resource_url + '/edit'" title="Editar" role="button"><i class="fa fa-edit"></i></a>
                                                 </div>
 
                                                 <form class="col" @submit.prevent="deleteItem(item.resource_url)">
-                                                    <button type="submit" class="btn btn-sm btn-danger" title="{{ trans('brackets/admin-ui::admin.btn.delete') }}"><i class="fa fa-trash-o"></i></button>
+                                                    <button type="submit" class="btn btn-sm btn-danger" title="Eliminar"><i class="fa fa-trash-o"></i></button>
                                                 </form>
                                             </div>
                                         </td>
@@ -108,7 +108,7 @@
 
                             <div class="row" v-if="pagination.state.total > 0">
                                 <div class="col-sm">
-                                    <span class="pagination-caption">{{ trans('brackets/admin-ui::admin.pagination.overview') }}</span>
+                                    <span class="pagination-caption">Mostrando un listado de 10 campamentos por bloque.</span>
                                 </div>
                                 <div class="col-sm-auto">
                                     <pagination></pagination>
