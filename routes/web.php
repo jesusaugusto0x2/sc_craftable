@@ -15,17 +15,8 @@ use Carbon\Carbon;
 use App\Models\Camp;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
-
-Route::get('generatePassword/{pass?}', function ($pass) {
-    return bcrypt($pass);
-});
-
-Route::get('testDate', function () {
-    return Camp::first()->date->toDateTimeString();
-});
-
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
@@ -122,3 +113,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
