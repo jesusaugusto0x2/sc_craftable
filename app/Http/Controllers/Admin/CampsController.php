@@ -195,6 +195,7 @@ class CampsController extends Controller
     public function viewGallery ($camp_id) {
         try {
             $camp = Camp::find($camp_id);
+
             return view('admin.camp.gallery')->with('camp', $camp);
         } catch (\Exception $e) {
             return response()->json($e->getMessage());
@@ -223,6 +224,22 @@ class CampsController extends Controller
 
             return redirect()->back()->with('notification_success', 'La foto ha sido guardada exitosamente');
 
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function deletePhoto ($photo_id) {
+        try {
+            $photo = CampPhoto::find($photo_id);
+
+            $path = str_replace(config('app.url') . 'images', '', $photo->url);
+
+            Storage::disk('images')->delete($path);
+
+            $photo->delete();
+
+            return redirect()->back()->with('notification_success', 'La foto ha sido eliminada exitosamente');
         } catch (\Exception $e) {
             return response()->json($e->getMessage());
         }

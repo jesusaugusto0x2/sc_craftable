@@ -12,15 +12,39 @@
         border-bottom: 1px solid rgba(207, 216, 220, 0.35);
     }
 
-    img {
+    .photo-cover {
+        position: relative;
         width: 300px;
         height: 300px;
-        cursor: pointer;
         border-radius: 5px;
     }
 
-    img:hover {
-        opacity: 0.8;
+    .photo-cover > a {
+        display: none;
+        position: absolute;
+        font-size: 64px;
+        left: 50%;
+        top: 50%;
+        margin-left: -27px;
+        margin-top: -20px;
+    }
+
+    img {
+        width: 100%;
+        border-radius: inherit;
+    }
+
+    .photo-cover:hover {
+        opacity: 0.7;
+    }
+
+    .photo-cover:hover > a {
+        color: black;
+        display: block;
+    }
+
+    a:hover {
+        cursor: pointer;
     }
 
     .title {
@@ -67,7 +91,14 @@
 
                     <div class="card-gallery">
                         @foreach($camp->photos as $photo)
-                            <img src="{{$photo->url}}" alt="photo_gallery">
+                            <div class="photo-cover">
+
+                                <a href="{{route('admin/camps/gallery/delete-photo', $photo->id)}}" title="Eliminar">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+
+                                <img src="{{$photo->url}}" alt="photo_gallery">
+                            </div>
                         @endforeach
                     </div>
 
