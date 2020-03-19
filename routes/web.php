@@ -117,3 +117,9 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('camps')->name('camps/')->group(static function() {
+    Route::get('/', 'User\CampsController@index')->name('index');
+    Route::get('/{id}/gallery', 'User\CampsController@gallery')->name('gallery');
+});
+
+
