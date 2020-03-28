@@ -7,3 +7,4 @@ import './payment-method';
 import './bank';
 import './method';
 import './camp-payments-index';
+import './camps-payment';

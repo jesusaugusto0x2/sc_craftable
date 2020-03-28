@@ -120,7 +120,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('camps')->name('camps/')->group(static function() {
     Route::get('/', 'User\CampsController@index')->name('index');
-    Route::get('/{id}/gallery', 'User\CampsController@gallery')->name('gallery');
+    Route::get('/{id}/gallery', 'User\CampsController@gallery')->name('{id}/gallery');
+    Route::get('/{id}/payment', 'User\CampsPaymentsController@create')->name('{id}/payment');
+    Route::post('/{id}/payment', 'User\CampsPaymentsController@store')->name('{id}/payment');
+    Route::post('/{id}/payment/save-photo', 'User\CampsPaymentsController@savePhoto')->name('{id}/payment/save-photo');
 });
-
-
