@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Camp extends Model
 {
@@ -38,5 +39,27 @@ class Camp extends Model
 
     public function photos () {
         return $this->hasMany('App\Models\CampPhoto');
+    }
+
+    public function scopeNonUserCamps($query) {
+        $user_id = Auth::user()->id;
+
+        return $query->leftJoin('camps_payments', function ($join) use ($user_id) {
+            $join->on('camps.id', '=', 'camps_payments.camp_id')
+            ->where('camps_payments.user_id', '=', $user_id);
+        })->select('camps.*')
+        ->whereNull('camps_payments.user_id')
+        ->groupBy('camps.id', 'camps.location', 'camps.entries', 'camps.cost', 'camps.date', 'camps.created_at', 'camps.updated_at')
+        ->get();
+    }
+
+    public function scopeUserCamps($query){
+        $user_id = Auth::user()->id;
+
+        return $query->join('camps_payments', 'camps.id', '=', 'camps_payments.camp_id')
+        ->select('camps.*')
+        ->where('camps_payments.user_id', '=', $user_id)
+        ->groupBy('camps.id', 'camps.location', 'camps.entries', 'camps.cost', 'camps.date', 'camps.created_at', 'camps.updated_at')
+        ->get();
     }
 }

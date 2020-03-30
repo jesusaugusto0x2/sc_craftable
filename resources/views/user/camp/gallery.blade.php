@@ -1,6 +1,6 @@
 @extends('user.layout.layout')
 
-@section('title', 'Camp Gallery')
+@section('title', 'Galeria')
 
 <style type="text/css">
     .card-gallery {
@@ -64,7 +64,7 @@
 
                     <div class="row">
                         <div class="col-auto">
-                            <a style="color:white;" class="btn btn-success" href="{{route('camps/index')}}">
+                            <a style="color:white;" class="btn btn-success" href="{{route($returnRoute)}}">
                                 <i class="fa fa-chevron-left"></i> Regresar
                             </a>
                         </div>

@@ -1,6 +1,6 @@
 @extends('user.layout.layout')
 
-@section('title', 'Campamentos')
+@section('title', 'Mis Campamentos')
 
 @section('body')
 <div class="row justify-content-center">
@@ -18,10 +18,10 @@
                     <p class="camp-cost">{{ number_format($camp->cost, 2) }}</p>
                 </div>
                 <div class="camp-options">
-                    <a href={{route("camps/{id}/payment", $camp->id)}} title="Inscripción" role="button" class="btn btn-sm btn-spinner btn-success" style="width: 30px;">
-                        <i class="fa fa-shopping-cart"></i>
+                    <a href={{route("my-camps/{id}/payment", $camp->id)}} title="Ver pago" role="button" class="btn btn-sm btn-spinner btn-success" style="width: 30px;">
+                        <i class="fa fa-eye"></i>
                     </a>
-                    <a href={{route("camps/{id}/gallery", $camp->id)}} title="Galeria" role="button" class="btn btn-sm btn-spinner btn-info" style="width: 30px;">
+                    <a href={{route("my-camps/{id}/gallery", $camp->id)}} title="Galeria" role="button" class="btn btn-sm btn-spinner btn-info" style="width: 30px;">
                         <i class="fa fa-image"></i>
                     </a>
                 </div>

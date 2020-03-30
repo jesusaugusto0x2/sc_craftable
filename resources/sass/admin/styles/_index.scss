@@ -86,3 +86,32 @@
 img {
     width: 100%;
 }
+
+.table-wrapper thead tr {
+    border-bottom: 1px solid #f0f2f5;
+    border-top: 1px solid #dee3e7;
+}
+
+.table-wrapper thead th {
+    border: none;
+}
+
+.table-wrapper  td {
+    border-top: 1px solid #f0f2f5;
+    vertical-align: middle;
+}
+
+.table-wrapper td:last-of-type {
+    justify-content: flex-end;
+    display: flex;
+}
+
+
+.table-wrapper td:last-of-type div {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.table-wrapper .row.no-gutters .btn {
+    margin-right: 10px;
+}

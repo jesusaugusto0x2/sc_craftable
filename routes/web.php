@@ -125,3 +125,13 @@ Route::prefix('camps')->name('camps/')->group(static function() {
     Route::post('/{id}/payment', 'User\CampsPaymentsController@store')->name('{id}/payment');
     Route::post('/{id}/payment/save-photo', 'User\CampsPaymentsController@savePhoto')->name('{id}/payment/save-photo');
 });
+
+Route::prefix('/my-camps')->name('my-camps/')->group(static function() {
+    Route::get('/', 'User\CampsController@myCamps')->name('');
+    Route::get('/{id}/gallery', 'User\CampsController@myCampsGallery')->name('{id}/gallery');
+    Route::get('/{id}/payment', 'User\CampsController@payment')->name('{id}/payment');
+});
+
+Route::prefix('payments')->name('payments/')->group(static function() {
+    Route::get('/{id}/detail', 'User\CampsController@payment')->name('{id}/detail');
+});
