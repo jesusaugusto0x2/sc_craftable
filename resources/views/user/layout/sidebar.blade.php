@@ -4,7 +4,7 @@
             <li class="nav-title">Contenido</li>
             <li class="nav-item"><a class="nav-link" href="{{ url('camps') }}"><i class="nav-icon icon-puzzle"></i> Campamentos</a></li>
            <li class="nav-item"><a class="nav-link" href="{{ url('my-camps') }}"><i class="nav-icon icon-book-open"></i> Mis Campamentos</a></li>
-           <li class="nav-item"><a class="nav-link" href="{{ url('admin/banks') }}"><i class="nav-icon icon-diamond"></i> Pagos</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('payments') }}"><i class="nav-icon icon-diamond"></i> Pagos</a></li>
            {{-- Do not delete me :) I'm used for auto-generation menu items --}}
 
             <li class="d-none nav-title">{{ trans('brackets/admin-ui::admin.sidebar.settings') }}</li>

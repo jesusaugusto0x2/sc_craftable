@@ -115,9 +115,25 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
+/* Auto-generated admin routes */
+/*Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
+        Route::prefix('camps-payments')->name('camps-payments/')->group(static function() {
+            Route::get('/',                                             'CampsPaymentsController@index')->name('index');
+            Route::get('/create',                                       'CampsPaymentsController@create')->name('create');
+            Route::post('/',                                            'CampsPaymentsController@store')->name('store');
+            Route::get('/{campsPayment}/edit',                          'CampsPaymentsController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'CampsPaymentsController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{campsPayment}',                              'CampsPaymentsController@update')->name('update');
+            Route::delete('/{campsPayment}',                            'CampsPaymentsController@destroy')->name('destroy');
+        });
+    });
+});*/
+
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'User\CampsController@index')->name('home');
 Route::prefix('camps')->name('camps/')->group(static function() {
     Route::get('/', 'User\CampsController@index')->name('index');
     Route::get('/{id}/gallery', 'User\CampsController@gallery')->name('{id}/gallery');
@@ -133,5 +149,8 @@ Route::prefix('/my-camps')->name('my-camps/')->group(static function() {
 });
 
 Route::prefix('payments')->name('payments/')->group(static function() {
-    Route::get('/{id}/detail', 'User\CampsController@payment')->name('{id}/detail');
+    Route::get('/', 'User\CampsPaymentsController@index')->name('');
+    Route::get('/{id}', 'User\CampsPaymentsController@show')->name('{id}');
 });
+
+

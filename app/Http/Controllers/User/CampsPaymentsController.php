@@ -4,7 +4,10 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CampsPayment\StoreCampsPayment;
+use App\Http\Requests\Admin\CampsPayment\IndexCampsPayment;
 use Illuminate\Support\Facades\Auth;
+use Brackets\AdminListing\Facades\AdminListing;
+use App\Models\CampsPayment;
 use App\Models\Camp;
 use App\Models\Bank;
 use App\Models\CampPayment;
@@ -16,6 +19,56 @@ use Illuminate\Support\Facades\Storage;
 
 class CampsPaymentsController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @param IndexCampsPayment $request
+     * @return array|Factory|View
+     */
+    public function index(IndexCampsPayment $request)
+    {
+        $user_id = Auth::user()->id;
+        // create and AdminListing instance for a specific model and
+        $data = AdminListing::create(CampPayment::class)->processRequestAndGet(
+            // pass the request with params
+            $request,
+            // set columns to query
+            ['reference', 'id', 'photo', 'date', 'validated', 'method_id', 'camp_id', 'user_id', 'bank_id'],
+            // set columns to searchIn
+            ['reference', 'date'],
+            // custom query
+            function($query) use ($user_id){
+                $query->where('user_id', $user_id);
+            }
+        );
+
+        foreach($data as $d) {
+            $d->method;
+            $d->camp;
+        }
+
+        if ($request->ajax()) {
+            if ($request->has('bulk')) {
+                return [
+                    'bulkItems' => $data->pluck('id')
+                ];
+            }
+            return ['data' => $data];
+        }
+
+        return view('user.camps-payment.index', ['data' => $data]);
+    }
+
+    public function show ($payment_id) {
+        try {
+            $payment = CampPayment::find($payment_id);
+            //dd($payment);
+            return view('user.camps-payment.show')->with('payment', $payment);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *

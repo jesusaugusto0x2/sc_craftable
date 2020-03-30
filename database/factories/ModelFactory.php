@@ -71,3 +71,20 @@ $factory->define(App\Models\Method::class, static function (Faker\Generator $fak
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\CampsPayment::class, static function (Faker\Generator $faker) {
+    return [
+        'reference' => $faker->sentence,
+        'photo' => $faker->sentence,
+        'date' => $faker->dateTime,
+        'validated' => $faker->boolean(),
+        'method_id' => $faker->sentence,
+        'camp_id' => $faker->sentence,
+        'user_id' => $faker->sentence,
+        'bank_id' => $faker->sentence,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

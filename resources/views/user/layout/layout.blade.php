@@ -2,7 +2,7 @@
 @extends('brackets/admin-ui::admin.layout.master')
 
 @section('header')
-    @include('brackets/admin-ui::admin.partials.header')
+    @include('user.layout.header')
 @endsection
 
 @section('content')

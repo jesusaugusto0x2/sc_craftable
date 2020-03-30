@@ -130,5 +130,28 @@ return [
         ],
     ],
 
+    'camps-payment' => [
+        'title' => 'Camps Payments',
+
+        'actions' => [
+            'index' => 'Camps Payments',
+            'create' => 'New Camps Payment',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'reference' => 'Reference',
+            'photo' => 'Photo',
+            'date' => 'Date',
+            'validated' => 'Validated',
+            'method_id' => 'Method',
+            'camp_id' => 'Camp',
+            'user_id' => 'User',
+            'bank_id' => 'Bank',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

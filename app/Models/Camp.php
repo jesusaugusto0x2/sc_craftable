@@ -46,7 +46,7 @@ class Camp extends Model
 
         return $query->leftJoin('camps_payments', function ($join) use ($user_id) {
             $join->on('camps.id', '=', 'camps_payments.camp_id')
-            ->where('camps_payments.user_id', '=', $user_id);
+            ->whereRaw('camps_payments.user_id = ? AND (camps_payments.validated IS NULL OR camps_payments.validated = 1)', [$user_id]);
         })->select('camps.*')
         ->whereNull('camps_payments.user_id')
         ->groupBy('camps.id', 'camps.location', 'camps.entries', 'camps.cost', 'camps.date', 'camps.created_at', 'camps.updated_at')
@@ -58,7 +58,7 @@ class Camp extends Model
 
         return $query->join('camps_payments', 'camps.id', '=', 'camps_payments.camp_id')
         ->select('camps.*')
-        ->where('camps_payments.user_id', '=', $user_id)
+        ->whereRaw('camps_payments.user_id = ? AND (camps_payments.validated IS NULL OR camps_payments.validated = 1)', [$user_id])
         ->groupBy('camps.id', 'camps.location', 'camps.entries', 'camps.cost', 'camps.date', 'camps.created_at', 'camps.updated_at')
         ->get();
     }

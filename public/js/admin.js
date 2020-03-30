@@ -112715,6 +112715,23 @@ Vue.component('camps-payment-form', {
 
 /***/ }),
 
+/***/ "./resources/js/admin/camps-payment/Listing.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/admin/camps-payment/Listing.js ***!
+  \*****************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Listing/AppListing */ "./resources/js/admin/app-components/Listing/AppListing.js");
+
+Vue.component('camps-payment-listing', {
+  mixins: [_app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__["default"]]
+});
+
+/***/ }),
+
 /***/ "./resources/js/admin/camps-payment/index.js":
 /*!***************************************************!*\
   !*** ./resources/js/admin/camps-payment/index.js ***!
@@ -112725,6 +112742,8 @@ Vue.component('camps-payment-form', {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Form */ "./resources/js/admin/camps-payment/Form.js");
+/* harmony import */ var _Listing__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Listing */ "./resources/js/admin/camps-payment/Listing.js");
+
 
 
 /***/ }),

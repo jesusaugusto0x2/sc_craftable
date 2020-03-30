@@ -18,10 +18,10 @@
                     <p class="camp-cost">{{ number_format($camp->cost, 2) }}</p>
                 </div>
                 <div class="camp-options">
-                    <a href={{route("camps/{id}/payment", $camp->id)}} title="Inscripción" role="button" class="btn btn-sm btn-spinner btn-success" style="width: 30px;">
+                    <a href={{route("camps/{id}/payment", $camp->id)}} title="Inscripción" role="button" class="btn btn-sm btn-spinner btn-success" style="width: 40px; font-size: 1.1rem;">
                         <i class="fa fa-shopping-cart"></i>
                     </a>
-                    <a href={{route("camps/{id}/gallery", $camp->id)}} title="Galeria" role="button" class="btn btn-sm btn-spinner btn-info" style="width: 30px;">
+                    <a href={{route("camps/{id}/gallery", $camp->id)}} title="Galeria" role="button" class="btn btn-sm btn-spinner btn-info" style="width: 40px; font-size: 1.1rem;">
                         <i class="fa fa-image"></i>
                     </a>
                 </div>
