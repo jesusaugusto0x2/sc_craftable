@@ -43,10 +43,10 @@
                                     <thead>
                                         <tr>
 
-                                            <th is='sortable' :column="'date'">Fecha</th>
                                             <th is='sortable' :column="'reference'">Referencia</th>
-                                            <th :column="'method_id'">Método de Pago</th>
+                                            <th is='sortable' :column="'date'">Fecha</th>
                                             <th :column="'camp_id'">Campamento</th>
+                                            <th :column="'method_id'">Método de Pago</th>
                                             <th is='sortable' :column="'validated'">Estado</th>
 
                                             <th></th>
@@ -66,13 +66,13 @@
                                     <tbody>
                                         <tr v-for="(item, index) in collection" :key="item.id" :class="bulkItems[item.id] ? 'bg-bulk' : ''">
 
-                                            <td>@{{ item.date | datetime }}</td>
                                             <td>@{{ item.reference }}</td>
-                                            <td>@{{ item.method.name }}</td>
+                                            <td>@{{ item.date | datetime }}</td>
                                             <td>@{{ item.camp.location }}</td>
+                                            <td>@{{ item.method.name }}</td>
                                             <td>
                                                 <div :class="'payment-status ' + (item.validated != null ? (item.validated == 1 ? 'payment-approved' : 'payment-denied') : 'payment-in-process')">
-                                                    @{{ item.validated != null ? (item.validated == 1 ? 'aprobado' : 'denegado') : 'procesando' }}
+                                                    @{{ item.validated != null ? (item.validated == 1 ? 'aprobado' : 'denegado') : 'en proceso' }}
                                                 </div>
                                             </td>
 

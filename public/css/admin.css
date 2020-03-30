@@ -23427,6 +23427,26 @@ div.trumbowyg-dropdown-table table td.active {
   position: relative;
 }
 
+.camp-payment-status {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: white;
+  padding: 0.2rem;
+  border-radius: 0 0.25rem 0 0;
+  padding-right: 0.4rem;
+  padding-left: 0.4rem;
+  font-size: 1rem;
+}
+
+.camp-payment-in-process {
+  background: #4273FA;
+}
+
+.camp-payment-approved {
+  background: #60CF7D;
+}
+
 .camp-img {
   width: 100%;
   height: 17rem;
@@ -23511,13 +23531,9 @@ img {
   vertical-align: middle;
 }
 
-.table-wrapper td:last-of-type {
-  justify-content: flex-end;
-  display: flex;
-}
-
 .table-wrapper td:last-of-type div {
   display: flex;
+  justify-content: flex-end;
   flex-wrap: nowrap;
 }
 

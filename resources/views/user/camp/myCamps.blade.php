@@ -7,6 +7,9 @@
     <div class="camps-wrapper">
         @foreach ($data as $camp)
             <div class="camp-card">
+                <div class="{{'camp-payment-status ' . ($camp->paymentsDesc[0]->validated === null ? 'camp-payment-in-process' : 'camp-payment-approved')}}">
+                    {{$camp->paymentsDesc[0]->validated === null ? 'en proceso' : 'inscripto'}}
+                </div>
                 @if (sizeof($camp->photos) > 0)
                     <img class="camp-img" src="{{$camp->photos[0]->url}}" alt="camp image" onerror="this.src='../images/camp_default.jpg';"><img>
                 @else

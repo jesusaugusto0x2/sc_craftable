@@ -7,7 +7,6 @@ use App\Http\Requests\Admin\CampsPayment\StoreCampsPayment;
 use App\Http\Requests\Admin\CampsPayment\IndexCampsPayment;
 use Illuminate\Support\Facades\Auth;
 use Brackets\AdminListing\Facades\AdminListing;
-use App\Models\CampsPayment;
 use App\Models\Camp;
 use App\Models\Bank;
 use App\Models\CampPayment;
@@ -29,18 +28,13 @@ class CampsPaymentsController extends Controller
     {
         $user_id = Auth::user()->id;
         // create and AdminListing instance for a specific model and
-        $data = AdminListing::create(CampPayment::class)->processRequestAndGet(
-            // pass the request with params
-            $request,
-            // set columns to query
-            ['reference', 'id', 'photo', 'date', 'validated', 'method_id', 'camp_id', 'user_id', 'bank_id'],
-            // set columns to searchIn
-            ['reference', 'date'],
-            // custom query
-            function($query) use ($user_id){
-                $query->where('user_id', $user_id);
-            }
-        );
+        $data = AdminListing::create(CampPayment::class)->attachOrdering($request->input('orderBy', 'id'), $request->input('orderDirection', 'desc'))
+        ->attachSearch($request->input('search', null), ['reference', 'date'])
+        ->attachPagination($request->currentPage)
+        ->modifyQuery(function($query) use ($user_id){
+            $query->where('user_id', $user_id);
+        })
+        ->get();
 
         foreach($data as $d) {
             $d->method;

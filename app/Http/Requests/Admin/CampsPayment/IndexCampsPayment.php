@@ -26,7 +26,7 @@ class IndexCampsPayment extends FormRequest
     {
         return [
             'orderBy' => 'in:reference,id,photo,date,validated,method_id,camp_id,user_id,bank_id|nullable',
-            'orderDirection' => 'in:asc,desc|nullable',
+            'orderDirection' => 'in:desc,asc|nullable',
             'search' => 'string|nullable',
             'page' => 'integer|nullable',
             'per_page' => 'integer|nullable',

@@ -31,8 +31,11 @@
     <div class="row">
         <div class="col">
             <div class="card">
-                <div class="card-header">
-                    {{$payment->camp->location}} - Pago #{{$payment->id}}
+                <div class="card-header payment-detail-header">
+                    <div> {{$payment->camp->location}} - Pago #{{$payment->id}} </div>
+                    <div class="{{'payment-status ' . ($payment->validated !== null ? ($payment->validated == 1 ? 'payment-approved' : 'payment-denied') : 'payment-in-process')}}">
+                        {{$payment->validated !== null ? ($payment->validated == 1 ? 'aprobado' : 'denegado') : 'por procesar'}}
+                    </div>
                 </div>
 
                 <div class="card-body">
@@ -113,14 +116,14 @@
                         <a style="color:white;" class="btn btn-success" href="{{route('admin/camps/payments', $payment->camp_id)}}">
                             <i class="fa fa-chevron-left"></i> Regresar
                         </a>
-
-                        <a style="color:white;" class="btn btn-danger" href="{{route('admin/camps/payment-validate', $payment->id)}}">
-                            @if($payment->validated == 1)
+                        @if($payment->validated === null)
+                            <a style="color:white;" class="btn btn-primary" href="{{route('admin/camps/payment-validate', $payment->id)}}">
                                 <i class="fa fa-check"></i> Validar pago
-                            @else
+                            </a>
+                            <a style="color:white;" class="btn btn-danger" href="{{route('admin/camps/payment-validate', $payment->id)}}">
                                 <i class="fa fa-times"></i>    Anular pago
-                            @endif
-                        </a>
+                            </a>
+                        @endif
                     </div>
 
                 </div>

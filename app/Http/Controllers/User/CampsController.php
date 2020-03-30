@@ -54,7 +54,9 @@ class CampsController extends Controller
     public function payment ($camp_id) {
         $user_id = Auth::user()->id;
         try {
-            $payment = CampPayment::whereRaw('camp_id = ? AND user_id = ?', [$camp_id, $user_id])->first();
+            $payment = CampPayment::whereRaw('camp_id = ? AND user_id = ?', [$camp_id, $user_id])
+            ->orderBy('id', 'desc')
+            ->first();
             return view('user.camp.payment')->with('payment', $payment);
         } catch (\Exception $e) {
             return response()->json($e->getMessage());

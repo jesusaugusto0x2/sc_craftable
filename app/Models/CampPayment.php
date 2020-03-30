@@ -36,7 +36,7 @@ class CampPayment extends Model
 
     public function getResourceUrlAttribute()
     {
-        return url('/admin/camp-payments/'.$this->getKey());
+        return url('/admin/camps/payment-info/'.$this->getKey());
     }
 
     public function camp () {

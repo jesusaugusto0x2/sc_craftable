@@ -37,6 +37,10 @@ class Camp extends Model
         return $this->hasMany('App\Models\CampPayment');
     }
 
+    public function paymentsDesc () {
+        return $this->hasMany('App\Models\CampPayment')->orderBy('id', 'desc');
+    }
+
     public function photos () {
         return $this->hasMany('App\Models\CampPhoto');
     }

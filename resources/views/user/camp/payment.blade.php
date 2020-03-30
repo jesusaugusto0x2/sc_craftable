@@ -31,8 +31,11 @@
     <div class="row">
         <div class="col">
             <div class="card">
-                <div class="card-header">
-                    {{$payment->camp->location}} - Pago #{{$payment->id}}
+                <div class="card-header payment-detail-header">
+                    <div> {{$payment->camp->location}} - Pago #{{$payment->id}} </div>
+                    <div class="{{'payment-status ' . ($payment->validated !== null ? ($payment->validated == 1 ? 'payment-approved' : 'payment-denied') : 'payment-in-process')}}">
+                        {{$payment->validated !== null ? ($payment->validated == 1 ? 'aprobado' : 'denegado') : 'en proceso'}}
+                    </div>
                 </div>
 
                 <div class="card-body">
