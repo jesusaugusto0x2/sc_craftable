@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Models\Bank;
 use App\Models\Method;
 
-use Faker\Generator as Faker;
+use Faker\Factory as Faker;
 
 class CampPaymentSeeder extends Seeder
 {
@@ -20,7 +20,7 @@ class CampPaymentSeeder extends Seeder
      */
     public function run()
     {
-        $faker = new Faker();
+        $faker = Faker::create();
 
         //Get all camps
         $camps = Camp::all();
@@ -59,7 +59,8 @@ class CampPaymentSeeder extends Seeder
                 //Create new camp payment row
                 CampPayment::create([
                     'reference' =>  random_int(10000, 99999),
-                    'photo'     =>  'https://i.picsum.photos/id/' . random_int(100, 999) . '/500/500.jpg',
+                    // 'photo'     =>  'https://i.picsum.photos/id/' . random_int(100, 999) . '/500/500.jpg',
+                    'photo'     => 'http://lorempixel.com/640/480/',
                     'date'      =>  $rand_date,
                     'validated' =>  random_int(0, 1),
                     'method_id' =>  $rand_payment_method_id,

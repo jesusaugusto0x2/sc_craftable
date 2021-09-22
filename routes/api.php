@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +14,13 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::get('/faker', function () {
+
+    $faker = Faker::create();
+
+    return $faker->address();
+});
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

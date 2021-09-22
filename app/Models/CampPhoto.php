@@ -9,7 +9,8 @@ class CampPhoto extends Model
     protected $table = 'camps_photos';
 
     protected $fillable = [
-        'url', 'camp_id'
+        'url',
+        'camp_id'
     ];
 
     protected $dates = [
@@ -17,7 +18,9 @@ class CampPhoto extends Model
         'updated_at'
     ];
 
-    protected $appends = ['resource_url'];
+    protected $appends = [
+        'resource_url'
+    ];
 
     /* ************************ ACCESSOR ************************* */
 

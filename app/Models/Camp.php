@@ -12,21 +12,19 @@ class Camp extends Model
         'entries',
         'cost',
         'date',
-
     ];
-
 
     protected $dates = [
         'date',
         'created_at',
         'updated_at',
-
     ];
 
-    protected $appends = ['resource_url'];
+    protected $appends = [
+        'resource_url'
+    ];
 
     /* ************************ ACCESSOR ************************* */
-
     public function getResourceUrlAttribute()
     {
         return url('/admin/camps/'.$this->getKey());
