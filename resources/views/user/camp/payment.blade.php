@@ -34,7 +34,7 @@
                 <div class="card-header payment-detail-header">
                     <div> {{$payment->camp->location}} - Pago #{{$payment->id}} </div>
                     <div class="{{'payment-status ' . ($payment->validated !== null ? ($payment->validated == 1 ? 'payment-approved' : 'payment-denied') : 'payment-in-process')}}">
-                        {{$payment->validated !== null ? ($payment->validated == 1 ? 'aprobado' : 'denegado') : 'en proceso'}}
+                        {{$payment->validated !== null ? ($payment->validated == 1 ? 'aprobado' : 'denegado') : 'En proceso'}}
                     </div>
                 </div>
 

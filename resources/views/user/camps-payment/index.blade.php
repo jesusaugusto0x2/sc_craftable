@@ -72,7 +72,7 @@
                                             <td>@{{ item.method.name }}</td>
                                             <td>
                                                 <div :class="'payment-status ' + (item.validated != null ? (item.validated == 1 ? 'payment-approved' : 'payment-denied') : 'payment-in-process')">
-                                                    @{{ item.validated != null ? (item.validated == 1 ? 'aprobado' : 'denegado') : 'en proceso' }}
+                                                    @{{ item.validated != null ? (item.validated == 1 ? 'aprobado' : 'denegado') : 'En proceso' }}
                                                 </div>
                                             </td>
 
