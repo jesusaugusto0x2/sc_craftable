@@ -24,8 +24,8 @@
                     </span>
                     <span class="caret"></span>
                 </a>
-                @if(View::exists('admin.layout.profile-dropdown'))
-                    @include('admin.layout.profile-dropdown')
+                @if(View::exists('user.layout.profile-dropdown'))
+                    @include('user.layout.profile-dropdown')
                 @endif
             </li>
         </ul>

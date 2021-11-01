@@ -68,6 +68,10 @@
     #label_photo > i {
         margin-right: 4px;
     }
+
+    #img_preview {
+        display: none;
+    }
 </style>
 
 @section('body')
@@ -165,7 +169,8 @@
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                $('#img_preview').attr('src', e.target.result); // Renderizamos la imagen
+                $('#img_preview').attr('src', e.target.result);
+                $('#img_preview').show(); // Renderizamos la imagen
             }
 
             reader.readAsDataURL(input.files[0]);

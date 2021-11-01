@@ -78,18 +78,18 @@
                             </div>
                         </div>
                     </div>
+                    @if ($payment->photo)
+                        <div class="card-block">
+                            <div class="row title">
+                                <strong>Foto de Referencia:</strong>
+                            </div>
+                            <br>
 
-                    <div class="card-block">
-                        <div class="row title">
-                            <strong>Foto de Referencia:</strong>
+                            <div class="d-flex justify-content-center">
+                                <img src="{{$payment->photo}}" alt="foto_ref">
+                            </div>
                         </div>
-                        <br>
-
-                        <div class="d-flex justify-content-center">
-                            <img src="{{$payment->photo}}" alt="foto_ref">
-                        </div>
-                    </div>
-
+                    @endif
                     <br><br>
                     <div class="row">
                         <a style="color:white;" class="btn btn-success" href="{{route('payments/')}}">

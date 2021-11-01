@@ -118,6 +118,7 @@ class CampsPaymentsController extends Controller
         CampPayment::create($request->all());
 
         if ($request->ajax()) {
+            \Session::flash('success', 'La inscripción fue realizada exitosamente');
             return ['redirect' => url('camps'), 'message' => 'La inscripcion fue realizada exitosamente'];
         }
         return redirect('camps')->with('notification_success', 'La inscripcion fue realizada exitosamente');

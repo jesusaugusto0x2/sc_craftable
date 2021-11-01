@@ -19,6 +19,7 @@
 </style>
 
 @section('body')
+    @include('alerts.flash-messages')
     <div class="col-lg-12">
         @if($notificacion = Session::get('notification_success'))
             <div class="notification notification-success">{{ $notificacion }}</div>
@@ -99,17 +100,18 @@
                             </div>
                         </div>
                     </div>
+                    @if($payment->photo)
+                        <div class="card-block">
+                            <div class="row title">
+                                <strong>Foto de Referencia:</strong>
+                            </div>
+                            <br>
 
-                    <div class="card-block">
-                        <div class="row title">
-                            <strong>Foto de Referencia:</strong>
+                            <div class="d-flex justify-content-center">
+                                <img src="{{$payment->photo}}" alt="foto_ref">
+                            </div>
                         </div>
-                        <br>
-
-                        <div class="d-flex justify-content-center">
-                            <img src="{{$payment->photo}}" alt="foto_ref">
-                        </div>
-                    </div>
+                    @endif
 
                     <br><br>
                     <div class="row">
@@ -117,10 +119,10 @@
                             <i class="fa fa-chevron-left"></i> Regresar
                         </a>
                         @if($payment->validated === null)
-                            <a style="color:white;" class="btn btn-primary" href="{{route('admin/camps/payment-validate', $payment->id)}}">
+                            <a style="color:white;" class="btn btn-primary" href="{{route('admin/camps/payment-validate', [$payment->id, 1])}}">
                                 <i class="fa fa-check"></i> Validar pago
                             </a>
-                            <a style="color:white;" class="btn btn-danger" href="{{route('admin/camps/payment-validate', $payment->id)}}">
+                            <a style="color:white;" class="btn btn-danger" href="{{route('admin/camps/payment-validate', [$payment->id, 0])}}">
                                 <i class="fa fa-times"></i>    Anular pago
                             </a>
                         @endif

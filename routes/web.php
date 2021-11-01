@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect()->route('login');
 });
+Route::get('/logout', 'Auth\LoginController@logout');
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
@@ -35,6 +36,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
+        Route::get('/', 'CampsController@index')->name('index');
         Route::prefix('camps')->name('camps/')->group(static function() {
             Route::get('/',                                             'CampsController@index')->name('index');
             Route::get('/create',                                       'CampsController@create')->name('create');
@@ -52,7 +54,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             // Custom
             Route::get('/{id}/payments', 'CampPaymentController@getPayments')->name('payments');
             Route::get('/payment-info/{payment_id}', 'CampPaymentController@viewPayment')->name('payment-info');
-            Route::get('/payment-validate/{payment_id}', 'CampPaymentController@validatePayment')->name('payment-validate');
+            Route::get('/payment-validate/{payment_id}/{status}', 'CampPaymentController@validatePayment')->name('payment-validate');
         });
     });
 });
@@ -121,8 +123,8 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 Auth::routes();
 
-Route::get('/home', 'User\CampsController@index')->name('home');
-Route::prefix('camps')->name('camps/')->group(static function() {
+Route::get('/home', 'User\CampsController@index')->name('home')->middleware('auth');
+Route::prefix('camps')->middleware('auth')->name('camps/')->group(static function() {
     Route::get('/', 'User\CampsController@index')->name('index');
     Route::get('/{id}/gallery', 'User\CampsController@gallery')->name('{id}/gallery');
     Route::get('/{id}/payment', 'User\CampsPaymentsController@create')->name('{id}/payment');
@@ -130,15 +132,21 @@ Route::prefix('camps')->name('camps/')->group(static function() {
     Route::post('/{id}/payment/save-photo', 'User\CampsPaymentsController@savePhoto')->name('{id}/payment/save-photo');
 });
 
-Route::prefix('/my-camps')->name('my-camps/')->group(static function() {
+Route::prefix('/my-camps')->middleware('auth')->name('my-camps/')->group(static function() {
     Route::get('/', 'User\CampsController@myCamps')->name('');
     Route::get('/{id}/gallery', 'User\CampsController@myCampsGallery')->name('{id}/gallery');
     Route::get('/{id}/payment', 'User\CampsController@payment')->name('{id}/payment');
 });
 
-Route::prefix('payments')->name('payments/')->group(static function() {
+Route::prefix('payments')->middleware('auth')->name('payments/')->group(static function() {
     Route::get('/', 'User\CampsPaymentsController@index')->name('');
     Route::get('/{id}', 'User\CampsPaymentsController@show')->name('{id}');
 });
 
+Route::prefix('user')->middleware('auth')->name('user/')->group(static function() {
+    Route::get('/profile', 'User\ProfileController@editProfile')->name('edit-profile');
+    Route::post('/profile', 'User\ProfileController@updateProfile')->name('update-profile');
+    Route::get('/password', 'User\ProfileController@editPassword')->name('edit-password');
+    Route::post('/password', 'User\ProfileController@updatePassword')->name('update-password');
+});
 

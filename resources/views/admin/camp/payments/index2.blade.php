@@ -43,6 +43,7 @@
                                     <thead>
                                         <tr>
 
+                                            <th is='sortable' :column="'id'">ID</th>
                                             <th is='sortable' :column="'reference'">Referencia</th>
                                             <th is='sortable' :column="'date'">Fecha</th>
                                             <th is='sortable' :column="'user_id'">Usuario</th>
@@ -66,6 +67,7 @@
                                     <tbody>
                                         <tr v-for="(item, index) in collection" :key="item.id" :class="bulkItems[item.id] ? 'bg-bulk' : ''">
 
+                                            <td>@{{ item.id }}</td>
                                             <td>@{{ item.reference }}</td>
                                             <td>@{{ item.date | datetime }}</td>
                                             <td>@{{ item.user.name }}</td>

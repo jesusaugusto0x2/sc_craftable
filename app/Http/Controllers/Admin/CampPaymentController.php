@@ -21,11 +21,22 @@ class CampPaymentController extends Controller
     {
         // create and AdminListing instance for a specific model and
         $camp = Camp::find($camp_id);
-        $data = AdminListing::create(CampPayment::class)
-        ->attachOrdering($request->input('orderBy', 'id'), $request->input('orderDirection', 'desc'))
-        ->attachSearch($request->input('search', null), ['reference', 'date'])
-        ->attachPagination($request->currentPage)
-        ->get();
+
+        $data = AdminListing::create(CampPayment::class)->processRequestAndGet(
+            // pass the request with params
+            $request,
+
+            // set columns to query
+            ['id', 'reference', 'date', 'validated', 'method_id', 'camp_id', 'user_id', 'bank_id'],
+
+            // set columns to searchIn
+            ['id', 'reference', 'date'],
+
+            
+            function($query) use ($request, $camp_id){
+                $query->where('camp_id', $camp_id)->orderBy($request->input('orderBy', 'id'),  $request->input('orderDirection', 'desc'));
+            }
+        );
 
         foreach($data as $d) {
             $d->method;
@@ -76,20 +87,20 @@ class CampPaymentController extends Controller
             return response()->json($e->getMessage());
         }
     }
-
+    
     /**
-     * Changes the status of a payment just by switching boolean
+     * Changes the status of a payment according to variable 'status'
      */
-    public function validatePayment ($payment_id) {
+    public function validatePayment ($payment_id, $status) {
         try {
             $payment = CampPayment::find($payment_id);
 
-            $payment->validated = !$payment->validated;
+            $payment->validated = $status;
             $payment->save();
 
             $status = $payment->validated == 1 ? 'validado' : 'invalidado';
 
-            return redirect()->back()->with('notification_success', 'El pago ha sido ' . $status);
+            return redirect()->back()->with('success', 'El pago ha sido ' . $status);
         } catch (\Exception $e) {
             return response()->json($e->getMessage());
         }

@@ -2,6 +2,12 @@
 
 @section('title', 'Inscripción' )
 
+<style type="text/css">
+    #img-preview {
+        display: none;
+    }
+</style>
+
 @section('body')
 
     <div class="container-xl">
@@ -113,7 +119,8 @@
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                $('#img-preview').attr('src', e.target.result); // Renderizamos la imagen
+                $('#img-preview').attr('src', e.target.result); 
+                $('#img-preview').show(); // Renderizamos la imagen
                 $("#form_photo").submit();
             }
 
